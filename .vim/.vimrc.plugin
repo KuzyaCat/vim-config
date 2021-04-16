@@ -1,0 +1,187 @@
+runtime macros/matchit.vim
+
+" OS Dependant things
+
+let s:running_windows = has("win16") || has("win32") || has("win64")
+
+" ==================================
+" ============*NERDTree*============
+" ==================================
+
+let NERDTreeMapOpenInTab='<Leader>n'
+let NERDTreeIgnore = ['\.beam$', '\.pyc$', 'ebin$', '\.so$', '\.dll$', '\tags$']
+let g:NERDTreeWinSize = 40
+
+
+" ==================================
+" ===========*EasyMotion*===========
+" ==================================
+"
+let g:EasyMotion_smartcase = 1
+
+" ==================================
+" ===========*WebDevIcons*==========
+" ==================================
+"
+let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
+
+" ==================================
+" ===========*MatchTagAlways*=======
+" ==================================
+"
+let g:mta_use_matchparen_group = 1
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'vue' : 1,
+    \ 'jsx' : 1,
+    \ 'tsx' : 1,
+    \}
+
+" ==================================
+" ===========*TypeScript*===========
+" ==================================
+"
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
+
+
+
+" ==================================
+" ==========*NERDTREE GIT*==========
+" ==================================
+"
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+➜  ~ cat ~/.vim/.vimrc.mappings
+let mapleader = ","
+let g:mapleader = ","
+
+" Stop using Arrow keys ;)
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+nnoremap ' `
+
+nnoremap ` '
+
+"nnoremap <Leader>q :q!<CR>
+"nnoremap <Leader>s :w<CR>
+"nnoremap <Leader>w :wq<CR>
+
+
+inoremap <C-p> <ESC>:Files<CR>
+noremap <C-p> <ESC>:Files<CR>
+
+inoremap jj <ESC>
+inoremap <C-l> <ESC>lli
+
+nnoremap <C-f> :b#<CR>
+
+
+nnoremap <leader><space> :noh<cr>
+
+imap <C-Space> <C-n>
+
+" Working with tabs"
+noremap <silent> <Leader>tn :tabnew<CR>
+noremap <silent> <Leader>th :tabprev<CR>
+noremap <silent> <Leader>tl :tabnext<CR>
+noremap <silent> <Leader>tc :tabclose<CR>
+noremap <silent> <Leader>to :tabonly<CR>
+
+" Do not overwrite register after paste
+xnoremap p pgvy
+
+vmap <Tab> >gv
+vmap <S-Tab> <gv
+
+" Close the current buffer
+map <leader>bd :Bclose<cr>
+
+" Close all the buffers
+map <leader>ba :1,1000 bd!<cr>
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+if has("mac") || has("macunix")
+  nmap <D-j> <M-j>
+  nmap <D-k> <M-k>
+  vmap <D-j> <M-j>
+  vmap <D-k> <M-k>
+endif
+
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+" Quuickly edit abolish list
+nmap <silent> <leader>ea :e ~/.vim/after/plugin/abolish.vim<CR>
+
+nnoremap j gj
+nnoremap k gk
+
+nnoremap <leader>. :CtrlPTag<cr>
+
+map <Leader>d :NERDTreeToggle<CR>
+
+" split windows
+nmap <leader>sh :leftabove  vnew<CR>
+nmap <leader>sl :rightbelow vnew<CR>
+nmap <leader>sk :leftabove  new<CR>
+nmap <leader>sj :rightbelow new<CR>
+
+" moving around
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+nmap <C-h> <C-w>h
+
+map <F2> :ls<CR>:b<Space>
+nnoremap <F3> :b#<CR>
+nnoremap <F4> :TagbarToggle<CR>
+nnoremap <F5> :GundoToggle<CR>
+
+imap <c-e> <c-o>$
+imap <c-a> <c-o>^
+
+imap <C-o> <ESC>a<Plug>snipMateNextOrTrigger
+smap <C-o> <Plug>snipMateNextOrTrigger
+
+
+" Clean trailing whitespace
+nnoremap <leader>cw mz:%s/\s\+$//<cr>:let @/=''<cr>`z
+
+" Select all
+nnoremap vaa ggvGg_
+nnoremap Vaa ggVG
+
+" Bi-directional find motion
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap <Leader><Leader>s <Plug>(easymotion-s)
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
