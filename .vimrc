@@ -3,14 +3,24 @@
 
 " Python Setting {
   set pythondll=/usr/local/Frameworks/Python.framework/Versions/3.9/Python
-  set pythonhome=/usr/local/Frameworks/Python.framework/Versions/3.9
+  set pythonjome=/usr/local/Frameworks/Python.framework/Versions/3.9
   set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.9/Python
   set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.9
 " }
 "
 set nocompatible
 
+packadd! dracula
+syntax enable
+colorscheme dracula
+
 call plug#begin('~/.vim/plugged')
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
 
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -33,38 +43,44 @@ Plug 'vim-airline/vim-airline'
 
 Plug 'w0rp/ale'
 
-"Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 Plug 'Valloric/MatchTagAlways'
 Plug 'mileszs/ack.vim'
 Plug 'ap/vim-css-color'
-"Plug 'fatih/vim-go'
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-"Plug 'jiangmiao/auto-pairs'
-"Plug 'mhinz/vim-startify'
 Plug 'othree/html5.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'yggdroot/indentline'
-"Plug 'mbbill/undotree'
 
 Plug 'tomtom/tlib_vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 
 
 Plug 'morhetz/gruvbox'
+Plug 'mhartington/oceanic-next'
 "Plug 'altercation/vim-colors-solarized'
 "Plug 'tomasiser/vim-code-dark'
 
+Plug 'rust-lang/rust.vim'
 Plug 'bfrg/vim-cpp-modern'
+
+Plugin 'pangloss/vim-javascript'
+Plug 'yuezk/vim-js'
+Plugin 'mxw/vim-jsx'
+Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
+
+Plugin 'ryanoasis/vim-devicons'
+
 
 call plug#end()
 
 let s:running_windows = has("win16") || has("win32") || has("win64")
 let s:colorful_term = (&term =~ "xterm") || (&term =~ "screen")
 let s:gui_running = has('gui_running')
+let g:indentLine_setConceal = 0
 
 an TouchBar.EnterFullScreen          <Nop>
 
